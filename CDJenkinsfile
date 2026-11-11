@@ -23,13 +23,12 @@ sh "tar -xzf react-app-${BUILD_NUMBER}.tar.gz -C deploy"
 }
 stage('Build Docker Image') {
 steps {
-sh "docker build -t react-app-${params.ENVIRONMENT}-${params.BUILD_NUMBER} deploy"
-}
+sh "docker build -t react-app-${params.ENVIRONMENT.toLowerCase()}-${params.BUILD_NUMBER} deploy"}
 }
 stage('Deploy to Docker') {
 steps {
-sh "docker rm -f react-${params.ENVIRONMENT} || true"
-sh "docker run -d --name react-${params.ENVIRONMENT} -p 8080:80 react-app-${params.ENVIRONMENT}-${params.BUILD_NUMBER}"
+sh "docker rm -f react-${params.ENVIRONMENT.toLowerCase()} || true"
+sh "docker run -d --name react-${params.ENVIRONMENT.toLowerCase()} -p 8080:80 react-app-${params.ENVIRONMENT.toLowerCase()}-${params.BUILD_NUMBER}"
 }
 }
 }
