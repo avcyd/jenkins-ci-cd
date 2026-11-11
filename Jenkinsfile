@@ -16,8 +16,8 @@ steps { sh 'npm run build' }
 }
 stage('Archive Artifact') {
 steps {
-sh 'tar -czf react-app-BUILD_NUMBER.tar.gz dist Dockerfile'
-archiveArtifacts artifacts: 'react-app-BUILD_NUMBER.tar.gz', fingerprint: true
+sh 'tar -czf react-app-${BUILD_NUMBER}.gz dist Dockerfile'
+archiveArtifacts artifacts: 'react-app-*.tar.gz', fingerprint: true
 }
 }
 }
